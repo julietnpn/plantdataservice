@@ -36,3 +36,6 @@ service_name = 'Plant Service'
 index_name = 'Plants'
 index_view = views.PlantView(models.Plant, db.session, name=index_name, endpoint='admin')
 admin = Admin(app, name=service_name, template_mode='bootstrap3', url='/', index_view=index_view)
+admin.add_view(views.FamilyView(models.Family, db.session))
+admin.add_view(views.GenusView(models.Genus, db.session))
+admin.add_view(views.SpeciesView(models.Species, db.session))

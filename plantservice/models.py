@@ -11,7 +11,7 @@ class Plant(Base):
     """Define the plan database model."""
     __tablename__ = 'plant'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(), index=True, nullable=False)
+    common_name = Column(String(), index=True, nullable=False)
 
     family_id = Column(Integer, ForeignKey('family.id'), nullable=False, index=True)
     family = relationship('Family')
