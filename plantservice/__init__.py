@@ -25,7 +25,6 @@ app.config.from_object('plantservice.default_settings')
 app.config.from_pyfile('settings.py', silent=True)
 
 # Create a database session.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + app.instance_path + '/' + app.config['DATABASE_FILENAME']
 db = SQLAlchemy(app)
 
 # Create the database tables, if necessary.

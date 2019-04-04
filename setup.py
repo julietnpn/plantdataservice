@@ -7,5 +7,6 @@ setup(
         'flask-admin',
         'flask-restful',
         'flask-sqlalchemy',
+        'psycopg2',
     ],
 )

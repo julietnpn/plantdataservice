@@ -1,8 +1,10 @@
+import os
+
 # Turn off debugging by default.
 DEBUG = False
 
-# Set the default database file location.
-DATABASE_FILENAME = 'database.sqlite3'
+# Set the default database URI.
+SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
 # Define a default secret.
 SECRET_KEY = 'secret'
