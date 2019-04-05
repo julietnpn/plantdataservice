@@ -23,7 +23,7 @@ class Plant(Base):
     species = relationship('Species')
 
     def __str__(self):
-        return "{}".format(self.url)
+        return "{}".format(self.common_name)
 
     def __repr__(self):
         return '<Plant {}>'.format(self.__str__())
@@ -36,7 +36,7 @@ class Family(Base):
     name = Column(String(), index=True)
 
     def __str__(self):
-        return "{}".format(self.url)
+        return "{}".format(self.name)
 
     def __repr__(self):
         return '<Family {}>'.format(self.__str__())
@@ -49,7 +49,7 @@ class Genus(Base):
     name = Column(String(), index=True)
 
     def __str__(self):
-        return "{}".format(self.url)
+        return "{}".format(self.name)
 
     def __repr__(self):
         return '<Genus {}>'.format(self.__str__())
@@ -62,7 +62,7 @@ class Species(Base):
     name = Column(String(), index=True)
 
     def __str__(self):
-        return "{}".format(self.url)
+        return "{}".format(self.name)
 
     def __repr__(self):
         return '<Species {}>'.format(self.__str__())
