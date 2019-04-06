@@ -7,6 +7,9 @@ from flask_admin import Admin
 # Import SQLAlchemy.
 from flask_sqlalchemy import SQLAlchemy
 
+# Import Flask-Restful libraries.
+from flask_restful import Api, reqparse, abort, Resource
+
 # Import models.
 import plantservice.models as models
 
@@ -29,6 +32,47 @@ db = SQLAlchemy(app)
 
 # Create the database tables, if necessary.
 models.Base.metadata.create_all(db.engine)
+
+
+def load_plants(session):
+    """Load all plants."""
+    plants = {}
+    for plant in session.query(models.Plant).order_by(models.Plant.common_name).all():
+        plants[plant.id] = {
+            'common_name': plant.common_name,
+            'family': plant.family.name,
+            'genus': plant.genus.name,
+            'species': plant.species.name,
+        }
+    return plants
+
+# Create a RESTful API service.
+api = Api(app)
+
+# Create a request parser.
+parser = reqparse.RequestParser()
+parser.add_argument('name')
+
+
+class Plant(Resource):
+    """Individual plant resource."""
+    def get(self, plant_id):
+        plants = load_plants(db.session)
+        if plant_id not in plants:
+            abort(404, message="Plant {} doesn't exist".format(plant_id))
+        return plants[plant_id]
+
+
+class PlantList(Resource):
+    """Plant list resource."""
+    def get(self):
+        plants = load_plants(db.session)
+        return plants
+
+
+# Create API resource endpoints.
+api.add_resource(PlantList, '/plants')
+api.add_resource(Plant, '/plants/<plant_id>')
 
 # Create a Flask Admin interface.
 service_name = 'Plant Service'
