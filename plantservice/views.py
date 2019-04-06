@@ -5,6 +5,11 @@ from flask_admin.contrib.sqla import ModelView
 class PlantView(ModelView):
     """Extend the ModelView class for Plant models."""
 
+    # Do not allow adding/editing/deleting records through the UI.
+    can_create = False
+    can_edit = False
+    can_delete = False
+
     # Display the "Common name" first in the columns and form.
     column_list = (
         'common_name',
