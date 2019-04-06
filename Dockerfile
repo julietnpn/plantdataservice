@@ -7,9 +7,6 @@ EXPOSE 80
 # Set the working directory to /usr/src/app.
 WORKDIR /usr/src/app
 
-# Install uwsgi with pip.
-RUN pip install --no-cache-dir uwsgi
-
 # Copy setup.py and README.md into /usr/src/app.
 # Install application dependencies with pip.
 # Build the plantservice package.

@@ -1,0 +1,11 @@
+---
+applications:
+- name: plantdataservice
+  buildpacks:
+    - python_buildpack
+  disk_quota: 512M
+  memory: 256M
+  timeout: 180
+  command: "uwsgi --shared-socket 0.0.0.0:$PORT --http =0 --protocol uwsgi --wsgi plantservice:app --master --enable-threads" 
+  services:
+    - db # cf create-service aws-rds shared-mysql database
